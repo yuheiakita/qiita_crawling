@@ -97,7 +97,7 @@ func NewSheetClient(ctx context.Context, spreadsheetID string) (*SheetClient, er
 func main() {
 	amazonLinkList := map[string]int{}
 	var IDList []string
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 100; i++ {
 		bin := getBinForURL(i)
 		var items []Item
 		if err := json.Unmarshal(bin, &items); err != nil {
@@ -138,7 +138,7 @@ func getBinForURL(pageCount int) []byte {
 	if err != nil {
 		log.Fatalf("url perse error: %v", err)
 	}
-	u.RawQuery = fmt.Sprintf("page=%s&per_page=1", strconv.Itoa(pageCount+1))
+	u.RawQuery = fmt.Sprintf("page=%s&per_page=100", strconv.Itoa(pageCount+1))
 	println(u.String())
 	req, _ := http.NewRequest(http.MethodGet, u.String(), nil)
 	req.Header.Add("Authorization", "Bearer ***")
